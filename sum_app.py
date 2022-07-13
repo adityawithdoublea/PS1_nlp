@@ -208,14 +208,14 @@ st.markdown("---")
 url_text = st.text_input("Enter/Paste a url below:")
 
 st.markdown(
-    "<h3 style='text-align: center; color: D0CCCC;'>OR</h3>",
+    "<h3 style='text-align: center; color: #a8a7a5;'>OR</h3>",
     unsafe_allow_html=True,
 )
 
 plain_text = st.text_input("Enter/Paste raw text below:")
 
 st.markdown(
-    "<h3 style='text-align: center; color: white;'>OR</h3>",
+    "<h3 style='text-align: center; color: #a8a7a5;'>OR</h3>",
     unsafe_allow_html=True,
 )
 
