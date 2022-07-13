@@ -31,7 +31,6 @@ time_str = time.strftime("%d%m%Y-%H%M%S")
 
 def article_text_extractor(url: str):
     
-    '''Extract text from url and divide text into chunks if length of text is more than 500 words'''
     
     ua = UserAgent()
 
@@ -104,7 +103,7 @@ def preprocess_plain_text(x):
     x = x.encode("ascii", "ignore").decode()  # unicode
     x = re.sub(r"https*\S+", " ", x)  # url
     x = re.sub(r"@\S+", " ", x)  # mentions
-    x = re.sub(r"#\S+", " ", x)  # hastags
+    x = re.sub(r"#\S+", " ", x)  # hashtags
     x = re.sub(r"\s{2,}", " ", x)  # over spaces
     x = re.sub("[^.,!?A-Za-z0-9]+", " ", x)  # special charachters except .,!?
 
@@ -112,7 +111,6 @@ def preprocess_plain_text(x):
 
 def extract_pdf(file):
     
-    '''Extract text from PDF file'''
     
     pdfReader = PdfFileReader(file)
     count = pdfReader.numPages
@@ -125,22 +123,15 @@ def extract_pdf(file):
     return all_text
 
 def extract_text_from_file(file):
-    
-    '''Extract text from uploaded file'''
 
-    # read text file
     if file.type == "text/plain":
-        # To convert to a string based IO:
-        stringio = StringIO(file.getvalue().decode("utf-8"))
 
-        # To read file as string:
+        stringio = StringIO(file.getvalue().decode("utf-8"))
         file_text = stringio.read()
 
-    # read pdf file
     elif file.type == "application/pdf":
         file_text = extract_pdf(file)
 
-    # read docx file
     elif (
         file.type
         == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -169,8 +160,6 @@ def distil_model():
     summarizer = pipeline('summarization',model='sshleifer/distilbart-cnn-12-6')
     return summarizer
 
-"""# Building the App"""
-
 st.title("Crossbar Summarizer for Content Creation")
 
 model_type = st.sidebar.selectbox(
@@ -186,19 +175,24 @@ st.markdown(
 
 st.markdown(
     """This project is part of our practice school project under Crossbar Talent and Management Solutions Pvt. Ltd.
-    For documents or text that is more than 500 words long, the app will divide those texts into small pieces of raw texts 
-    with not more than 500 words and summarize each piece. Please note when using the sidebar slider, those values 
+    """)
+
+st.markdown(""" For documents or text that is more than 500 words long, the app will divide those texts into small pieces of raw texts 
+    with not more than 500 words and summarize each piece.""")
+
+st.markdown("""Please note when using the sidebar slider, those values 
     represent the min/max text length per piece of text to be summarized. If your article to be summarized is 
     1000 words, it will be divided into two pieces of 500 words first then the default max length of 100 words is 
-    applied per chunk, resulting in a summarized text with 200 words maximum. 
-    There are two models available to choose from:""")
+    applied per piece, resulting in a summarized text with 200 words maximum.""")
+
+st.markdown(""" There are two models available to choose from:""")
 
 st.markdown("""   
     - BART_CTMS, trained on large [CNN and Daily Mail] then fine-tuned on [SciTLDR](https://huggingface.co/datasets/scitldr)
     - DistilBart_CTMS, which is a distilled (smaller) version of the large BART model."""
 )
 
-st.markdown("""Note that the model will take longer to generate summaries for documents that are too long!""")
+st.markdown("""NOTE: The model will take longer to generate summaries for documents that are too long!""")
 
 st.markdown(
     "The app currently only accepts the following formats for summarization task:"
@@ -214,7 +208,7 @@ st.markdown("---")
 url_text = st.text_input("Enter/Paste a url below:")
 
 st.markdown(
-    "<h3 style='text-align: center; color: white;'>OR</h3>",
+    "<h3 style='text-align: center; color: D0CCCC;'>OR</h3>",
     unsafe_allow_html=True,
 )
 
