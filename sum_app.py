@@ -192,7 +192,7 @@ st.markdown("""
     - DistilBart_CTMS, which is a distilled (smaller) version of the large BART model."""
 )
 
-st.markdown("""NOTE: The model will take longer to generate summaries for documents that are too long!""")
+st.markdown("""NOTE: The BART model will take longer to generate summaries for documents that are too long. We recommend using DistilBart for long documents and BART for smaller documents.""")
 
 st.markdown(
     "The app currently only accepts the following formats for summarization task:"
